@@ -1,5 +1,9 @@
 # 3js Learning Materials
 
+## 3js File Structure Recommendation
+
+![Screenshot](./src/assets/3js-file-structure.png)
+
 ### Canvas
 
 - The canvas is the area where the 3D object is rendered.
@@ -55,10 +59,50 @@
 - The hemisphere light property sets the hemisphere of the light source for the 3D object.
 - The hemisphere light property is created using the <hemisphereLight> tag.
 
-### Animation
+### Ambient Light
+
+- The ambient light property sets the ambient light source for the 3D object. Illuminates all objects in the scene equally.
+- This light cannot be used to cast shadows as it does not have a direction.
+- The ambient light property is created using the <ambientLight> tag.
+
+## Animation
 
 - The animation property sets the animation for the 3D object.
 - The animation property is created using the <animation> tag.
+
+### useFrame()
+
+- The useFrame() hook is a special feature specific to react-three-fiber., not a general React hook or part of Three.js itself.
+- The useFrame() function is used to create an animation loop for the 3D object. It allows you to execute code on every frame of the animation, which runs at 60 frames per second.
+- It is similar to the requestAnimationFrame() function in JavaScript.
+- It is used to update the position, rotation, and scale of the 3D object.
+- The useFrame() function takes a callback function as an argument, which is called on every frame of the animation loop.
+
+```javascript
+import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+
+export function RotatingSphere() {
+  // Create a reference to our mesh
+  const meshRef = useRef();
+
+  // This function runs on every frame
+  useFrame((state, delta) => {
+    // Rotate the mesh a little bit each frame
+    meshRef.current.rotation.y += delta * 0.5;
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[1, 32, 32]} />
+      {/* args={[radius, widthSegments, heightSegments]} */}
+      <meshStandardMaterial color="#3a86ff" />
+    </mesh>
+  );
+}
+```
+
+![Screenshot](./src/assets/useFrame-parameters.png)
 
 # React + Vite
 
