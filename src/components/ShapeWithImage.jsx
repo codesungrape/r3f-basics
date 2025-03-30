@@ -31,15 +31,22 @@ const ShapeWithImage = (props) => {
         // On successful load
         loadedTexture.flipY = false; // Try this if texture appears upside down
         
-        // Update just the front face material (index 4)
+        // All sides of the cube have the image
         setMaterials(prevMaterials => {
-          const newMaterials = [...prevMaterials];
-          newMaterials[4] = new THREE.MeshStandardMaterial({ 
-            map: loadedTexture,
-            side: THREE.FrontSide 
-          });
-          return newMaterials;
-        });
+            return prevMaterials.map(() => new THREE.MeshStandardMaterial({
+                map: loadedTexture,
+                side: THREE.FrontSide
+            }));
+        })
+        
+        // Update just the front face material (index 4)
+        // setMaterials(prevMaterials => {
+        //   return prevMaterials.map() = new THREE.MeshStandardMaterial({ 
+        //     map: loadedTexture,
+        //     side: THREE.FrontSide 
+        //   });
+        //   return newMaterials;
+        // });
         
         setTextureLoaded(true);
       },
