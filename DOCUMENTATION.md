@@ -140,16 +140,16 @@ The <Environment preset="night" /> component in React Three Fiber (r3f) sets up 
 
 - You can also control additional properties of the Environment component:
 
-`````jsx
+```jsx
 <Environment
   preset="sunset"
   background={true} // Set to false if you only want the lighting without changing the background
   blur={0.5} // Controls background blur (0-1)
   intensity={1} // Controls the overall intensity of the environment lighting
 />
-````jsx
-Try different presets to see which one best fits the mood and style you want for your scene!
+```
 
+Try different presets to see which one best fits the mood and style you want for your scene!
 
 ## Animation
 
@@ -186,6 +186,41 @@ export function RotatingSphere() {
     </mesh>
   );
 }
-`````
+```
 
 ![Screenshot](./src/assets/useFrame-parameters.png)
+
+## Issue 8: Summary of Changes Made to the Three.js React Project
+
+We modified your 3D cube component to accept dynamic textures and properly display them. Here's a summary of what we did:
+
+1. Updated ShapeWithImage.jsx
+
+   - Made the component accept a dynamic imageTexture prop instead of hardcoding the texture
+   - Added detailed JSDoc documentation to clarify props and usage
+   - Fixed a critical logic error in the useEffect hook that was preventing textures from loading
+   - Improved error handling and messaging for better debugging
+
+2. Updated App.jsx
+
+   - Changed from using string paths to properly importing the image assets
+   - Created an array to store the image textures
+   - Assigned a different texture to each cube in the 3x3 grid
+   - Added a dependency array to the useEffect hook to prevent re-runs on every render
+
+3. Key Fixes
+
+   - Fixed the circular logic issue that was causing "Image texture loading error"
+   - Implemented proper React patterns for props destructuring and state management
+   - Ensured proper cleanup of Three.js materials to prevent memory leaks
+
+#### Final Result
+
+The code now allows you to:
+
+    * Pass different textures to each cube
+    * Load textures dynamically through props
+    * Properly handle loading states and errors
+    * Create a visually interesting 3x3 grid of textured, rotating cubes
+
+These changes have improved both the functionality and maintainability of your code while fixing the texture loading errors.
