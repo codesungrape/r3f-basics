@@ -2,9 +2,27 @@ import { useRef, useState, useEffect } from 'react';
 import { useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Html } from '@react-three/drei';
-import AIChrisTexture from '../assets/AIChris.png';
+
+
+/**
+ * ShapeWithImage Component
+ * 
+ * A 3D cube with customizable texture and position.
+ * 
+ * Props:
+ * @param {Object} props - Component props
+ * @param {string|import} props.imageTexture - Required. The image to apply to the cube. 
+ *        Can be an imported image or a URL string.
+ * @param {Array} props.position - Optional. The [x, y, z] position of the cube in 3D space.
+ *        Defaults to [0, 0, 0].
+ * 
+ * Usage:
+ * <ShapeWithImage imageTexture={importedImage} position={[1, 2, 3]} />
+ */
 
 const ShapeWithImage = (props) => {
+    const imageTexture = props.imageTexture
+    const position = props.position || [0, 0, 0]
   const meshRef = useRef();
   const [isRotating, setIsRotating] = useState(true);
   const [textureLoaded, setTextureLoaded] = useState(false);
@@ -22,12 +40,18 @@ const ShapeWithImage = (props) => {
   
   // Load texture properly with error handling
   useEffect(() => {
+    if (!imageTexture) {
+        setError('No image texture provided');
+        return;
+    }
+
     const textureLoader = new THREE.TextureLoader();
 
     
     textureLoader.load(
-      AIChrisTexture,
+      imageTexture,
       (loadedTexture) => {
+        console.log("loadedTexture: ",loadedTexture)
         // On successful load
         loadedTexture.flipY = false; // Try this if texture appears upside down
         
@@ -39,14 +63,6 @@ const ShapeWithImage = (props) => {
             }));
         })
         
-        // Update just the front face material (index 4)
-        // setMaterials(prevMaterials => {
-        //   return prevMaterials.map() = new THREE.MeshStandardMaterial({ 
-        //     map: loadedTexture,
-        //     side: THREE.FrontSide 
-        //   });
-        //   return newMaterials;
-        // });
         
         setTextureLoaded(true);
       },
@@ -62,9 +78,9 @@ const ShapeWithImage = (props) => {
     return () => {
       materials.forEach(material => material.dispose());
     };
-  }, []);
+  }, [imageTexture]); // re-run when imageTexture changes 
   
-  // Animation loop (equivalent to requestAnimationFrame)
+  // ANIMATION loop (equivalent to requestAnimationFrame)
   useFrame(() => {
     if (isRotating && meshRef.current) {
       meshRef.current.rotation.x += 0.01;
@@ -77,9 +93,6 @@ const ShapeWithImage = (props) => {
     e.stopPropagation();
     setIsRotating(!isRotating);
   };
-
-  // Use provided position or default position
-  const position = props.position || [0, 0, 0];
 
   return (
     <>
