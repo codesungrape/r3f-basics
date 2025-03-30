@@ -7,6 +7,8 @@ import Sphere from './components/Sphere';
 import Torus from './components/Torus';
 import TorusKnot from './components/TorusKnot';
 import { useEffect, useState } from 'react';
+import ShapeWithImage from './components/ShapeWithImage';
+
 
 
 
@@ -96,7 +98,7 @@ const App = () => {
             args={[1, 0.1, 50, 25, 2, 5]}
             color={"hotpink"}
           />
-
+          < ShapeWithImage position={[3, 1, 0]}/>
           
       </Canvas>
     </ErrorBoundary>

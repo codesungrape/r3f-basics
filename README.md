@@ -1,3 +1,9 @@
+### Tech Stack
+
+- Vite, React and JavaScript, Three.js and React-Three-Fiber
+- In order to build a protype fast, I used vinalla JS, Vite React template. In production, I would use TypeScript.
+- Testing hasnt been enabled, but if conract received, I would use appropriate testing libraries like Jest, Playwright, 3D testing library, etc.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
