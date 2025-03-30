@@ -1,8 +1,9 @@
+// src/components/ShapeWithImage.jsx
+
 import { useRef, useState, useEffect } from 'react';
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Html } from '@react-three/drei';
-
 
 /**
  * ShapeWithImage Component
@@ -15,18 +16,27 @@ import { Html } from '@react-three/drei';
  *        Can be an imported image or a URL string.
  * @param {Array} props.position - Optional. The [x, y, z] position of the cube in 3D space.
  *        Defaults to [0, 0, 0].
+ * @param {boolean} props.isContracted - Whether the image should be contracted (showing full image).
+ * @param {number} props.index - The index of this shape in the grid.
  * 
  * Usage:
- * <ShapeWithImage imageTexture={importedImage} position={[1, 2, 3]} />
+ * <ShapeWithImage imageTexture={importedImage} position={[1, 2, 3]} isContracted={false} index={0} />
  */
 
 const ShapeWithImage = (props) => {
-    const imageTexture = props.imageTexture
-    const position = props.position || [0, 0, 0]
+  const { imageTexture, position = [0, 0, 0], isContracted, index } = props;
   const meshRef = useRef();
-  const [isRotating, setIsRotating] = useState(true);
+  const [isRotating, setIsRotating] = useState(!isContracted);
   const [textureLoaded, setTextureLoaded] = useState(false);
   const [error, setError] = useState(null);
+  
+  // Target position for animation
+  const targetPosition = useRef(new THREE.Vector3(...position));
+  
+  // Update target position when props change
+  useEffect(() => {
+    targetPosition.current.set(position[0], position[1], position[2]);
+  }, [position]);
   
   // Create materials array
   const [materials, setMaterials] = useState([
@@ -38,6 +48,11 @@ const ShapeWithImage = (props) => {
     new THREE.MeshStandardMaterial({ color: 'magenta' })      // back
   ]);
   
+  // Update rotation state when contraction state changes
+  useEffect(() => {
+    setIsRotating(!isContracted);
+  }, [isContracted]);
+
   // Load texture properly with error handling
   useEffect(() => {
     if (!imageTexture) {
@@ -46,14 +61,18 @@ const ShapeWithImage = (props) => {
     }
 
     const textureLoader = new THREE.TextureLoader();
-
+    textureLoader.crossOrigin = 'anonymous';
+    
+    // Update texture loading to avoid the WebGL warnings
+    THREE.ColorManagement.enabled = true;
     
     textureLoader.load(
       imageTexture,
       (loadedTexture) => {
-        console.log("loadedTexture: ",loadedTexture)
-        // On successful load
-        loadedTexture.flipY = false; // Try this if texture appears upside down
+        // Set proper texture parameters to avoid warnings
+        loadedTexture.flipY = true; // Fix upside-down images
+        loadedTexture.generateMipmaps = true;
+        loadedTexture.needsUpdate = true;
         
         // All sides of the cube have the image
         setMaterials(prevMaterials => {
@@ -61,8 +80,7 @@ const ShapeWithImage = (props) => {
                 map: loadedTexture,
                 side: THREE.FrontSide
             }));
-        })
-        
+        });
         
         setTextureLoaded(true);
       },
@@ -81,14 +99,36 @@ const ShapeWithImage = (props) => {
   }, [imageTexture]); // re-run when imageTexture changes 
   
   // ANIMATION loop (equivalent to requestAnimationFrame)
-  useFrame(() => {
-    if (isRotating && meshRef.current) {
+  useFrame((state, delta) => {
+    if (!meshRef.current) return;
+    
+    // Position animation with smooth lerping
+    meshRef.current.position.lerp(targetPosition.current, 0.1);
+    
+    if (isRotating) {
+      // Continue rotating
       meshRef.current.rotation.x += 0.01;
       meshRef.current.rotation.y += 0.01;
+    } else {
+      // Smoothly reset rotation when not rotating
+      meshRef.current.rotation.x *= 0.9;
+      meshRef.current.rotation.y *= 0.9;
+      meshRef.current.rotation.z *= 0.9;
+      
+      // When rotation is very small, just set it to zero
+      if (Math.abs(meshRef.current.rotation.x) < 0.01) {
+        meshRef.current.rotation.x = 0;
+      }
+      if (Math.abs(meshRef.current.rotation.y) < 0.01) {
+        meshRef.current.rotation.y = 0;
+      }
+      if (Math.abs(meshRef.current.rotation.z) < 0.01) {
+        meshRef.current.rotation.z = 0;
+      }
     }
   });
   
-  // Handle click to toggle rotation
+  // Handle click on this specific cube (stops propagation to not trigger global handler)
   const handleClick = (e) => {
     e.stopPropagation();
     setIsRotating(!isRotating);
@@ -98,12 +138,12 @@ const ShapeWithImage = (props) => {
     <>
       <mesh
         ref={meshRef}
-        position={position}
+        position={[position[0], position[1], position[2]]}
         onClick={handleClick}
       >
         <boxGeometry args={[1, 1, 1]} />
-        {materials.map((material, index) => (
-          <primitive key={index} object={material} attach={`material-${index}`} />
+        {materials.map((material, idx) => (
+          <primitive key={idx} object={material} attach={`material-${idx}`} />
         ))}
       </mesh>
       
