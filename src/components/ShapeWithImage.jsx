@@ -138,7 +138,7 @@ const ShapeWithImage = (props) => {
     <>
       <mesh
         ref={meshRef}
-        position={[position[0], position[1], position[2]]}
+        position={[position[1], position[1], position[2]]}
         onClick={handleClick}
       >
         <boxGeometry args={[1, 1, 1]} />
