@@ -59,10 +59,21 @@ const App = () => {
   // state to track if the image is contracted (showing the full image)
   const [isContracted, setIsContracted] = useState(false);
 
+  // state to track mouse position
+  const [mousePosition, setMousePosition] = useState({ x:0 , y:0})
+
   // Handle click anywhere on the page
   const handleGlobalClick = useCallback(() => {
     setIsContracted(prev => !prev);
   }, []);
+
+  const handleMouseMove = useCallback((event)=> {
+    // calculate normalized mouse position (-1 to 1)
+    const x = (event.clientX) / window.innerWidth * 2 -1;
+    const y = (event.clientY) / window.innerHeight * 2 -1;
+
+    setMousePosition({ x, y })
+  })
 
   useEffect(() => {
     // function to update scroll position
@@ -76,12 +87,16 @@ const App = () => {
     // listen for click events
     window.addEventListener('click', handleGlobalClick);
 
+    // listen for mouse movements
+    window.addEventListener('mousemove', handleMouseMove)
+
     // Clean up
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('click', handleGlobalClick);
+      window.addEventListener('mousemove', handleMouseMove)
     }
-  }, [handleGlobalClick]);
+  }, [handleGlobalClick, handleMouseMove]);
   
   return didCatch ? (<div>{error.message}</div>) :
     (
@@ -110,15 +125,18 @@ const App = () => {
           <Environment preset="park" />
 
           <OrbitControls
-            enableZoom={false}
+            enableZoom={true}
             enablePan={false}
             minPolarAngle={Math.PI / 3}
             maxPolarAngle={Math.PI / 2}
+            minAzimuthAngle={-Math.PI / 0.0}  // Limits left rotation
+            maxAzimuthAngle={Math.PI / 2}   // Limits right rotation
             dampingFactor={0.05}
-            rotateSpeed={0.5}
+            rotateSpeed={0.15}
           />
           <Model 
-          position={[1, 3, 1]}
+          position={[2, 0, 2]}
+          rotation={[mousePosition.y * 0.0001, mousePosition.x * 0.4, 0]}
           />
             {/* <Sphere
             position={[-3, 0, 1]}
@@ -146,42 +164,3 @@ const App = () => {
 
 export default App
 
-
-// <group position={[-2, -2, -2]}>
-// import Torus from './components/Torus';
-// import TorusKnot from './components/TorusKnot';
-// import Cube from './components/Cube';
-// {/* <Cube 
-//   position={[1, 0, 0]}
-//   args={[1, 1, 1]}
-//   color={"yellow"}
-// /> */}
-// {/* <Cube 
-//   position={[-1, 0, 1]}
-//   args={[1, 1, 1]}
-//   color={"lightgreen"}
-// /> */}
-// {/* <Cube 
-//   position={[-1, 2, 0]}
-//   args={[1, 1, 1]}
-//   color={"pink"}
-// /> */}
-// {/* <Cube 
-//   position={[0, 1, 0]}
-//   args={[1, 1, 1]}
-//   color={"lightblue"}
-// /> */}
-//     {/* <Torus 
-//     position={[2, 0, 0]}
-//     // args={[radius, widthSegments, heightSegments]}
-//     args={[0.25, 0.2, 5]}
-//     color={"hotpink"}
-//   /> */}
-//   {/* <TorusKnot
-//     position={[0, 3, 2]}
-//     // args={[radius, widthSegments, heightSegments]}
-//     args={[1, 0.1, 50, 25, 2, 5]}
-//     color={"hotpink"}
-//   /> */}
-
-// </group>
