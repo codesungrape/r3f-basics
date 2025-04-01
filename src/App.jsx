@@ -4,7 +4,7 @@ import './App.css'
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei'; 
 import { useErrorBoundary} from 'use-error-boundary';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useFrame } from 'react';
 import { Model } from './components/Model';
 import React from 'react'
 
@@ -71,7 +71,8 @@ const App = () => {
             rotateSpeed={0.15}
           />
           <Model 
-          position={[2, 0, 2]}
+          position={[5, 0, 2]}
+          scale={[1.5, 1.5, 1.5]}
           rotation={[mousePosition.y * 0.0001, mousePosition.x * 0.4, 0]}
           />
           
