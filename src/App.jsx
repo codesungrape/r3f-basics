@@ -17,6 +17,9 @@ import segment_2_0 from './assets/ChrisAI/segment_2_0.png';
 import segment_2_1 from './assets/ChrisAI/segment_2_1.png';
 import segment_2_2 from './assets/ChrisAI/segment_2_2.png';
 import Sphere from './components/Sphere';
+import { Model } from './components/Model';
+import React from 'react'
+
 
 const importedTextureList = [
   segment_0_0, segment_0_1, segment_0_2,
@@ -43,6 +46,8 @@ const contractedPositions = [
   // Row 3
   [0, -1, 0], [1, -1, 0], [2, -1, 0]
 ];
+
+
 
 const App = () => {
   // safeguarding the canvas against WebGL context crashes
@@ -85,13 +90,24 @@ const App = () => {
         <Instructions isContracted={isContracted} />
         <Canvas 
           fallback={<div>Sorry no WebGL supported!</div>}
-          camera={{ position: [2, 0, 8], fov: 45 }}>
-          {/* Add better lighting for the contracted image */}
-          <ambientLight intensity={0.6} />
-          <directionalLight position={[10, 10, 5]} intensity={0.5} />
+       
+          camera={{ position: [2, 0, 12], fov: 60 }}
+          style={{ height: '100vh', position: 'fixed', top: 0, left: 0 }}>
           
+          {/* Improved lighting setup */}
+  <ambientLight intensity={1.0} />
+  <hemisphereLight skyColor="#ffffff" groundColor="#444444" intensity={0.8} />
+  <directionalLight 
+    position={[10, 10, 5]} 
+    intensity={0.8}
+    castShadow 
+    shadow-mapSize-width={1024} 
+    shadow-mapSize-height={1024}
+  />
+  <directionalLight position={[-10, 5, -5]} intensity={0.5} color="#ffffff" />
+
           {/* Environment setup */}
-          <Environment preset="night" />
+          <Environment preset="park" />
 
           <OrbitControls
             enableZoom={false}
@@ -101,15 +117,18 @@ const App = () => {
             dampingFactor={0.05}
             rotateSpeed={0.5}
           />
-            <Sphere
+          <Model 
+          position={[1, 3, 1]}
+          />
+            {/* <Sphere
             position={[-3, 0, 1]}
             // args={[radius, widthSegments, heightSegments]}
             args={[1, 25, 40]}
             isHovered={"hotpink"}
-          />
+          /> */}
           
           {/* Grid of ShapeWithImage components */}
-          {importedTextureList.map((texture, index) => (
+          {/* {importedTextureList.map((texture, index) => (
             <ShapeWithImage 
               key={index}
               imageTexture={texture} 
@@ -117,7 +136,7 @@ const App = () => {
               isContracted={isContracted}
               index={index}
             />
-          ))}
+          ))} */}
           
         </Canvas>
       </div>
