@@ -16,7 +16,6 @@ import segment_1_2 from './assets/ChrisAI/segment_1_2.png';
 import segment_2_0 from './assets/ChrisAI/segment_2_0.png';
 import segment_2_1 from './assets/ChrisAI/segment_2_1.png';
 import segment_2_2 from './assets/ChrisAI/segment_2_2.png';
-import Sphere from './components/Sphere';
 import { Model } from './components/Model';
 import React from 'react'
 
@@ -76,13 +75,13 @@ const App = () => {
   })
 
   useEffect(() => {
-    // function to update scroll position
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    }
+    // // function to update scroll position
+    // const handleScroll = () => {
+    //   setScrollPosition(window.scrollY);
+    // }
 
-    // listen for scroll events
-    window.addEventListener('scroll', handleScroll);
+    // // listen for scroll events
+    // window.addEventListener('scroll', handleScroll);
     
     // listen for click events
     window.addEventListener('click', handleGlobalClick);
@@ -92,7 +91,7 @@ const App = () => {
 
     // Clean up
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      // window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('click', handleGlobalClick);
       window.addEventListener('mousemove', handleMouseMove)
     }
@@ -102,10 +101,8 @@ const App = () => {
     (
     <ErrorBoundary>
       <div className="canvas-container">
-        <Instructions isContracted={isContracted} />
         <Canvas 
           fallback={<div>Sorry no WebGL supported!</div>}
-       
           camera={{ position: [2, 0, 12], fov: 60 }}
           style={{ height: '100vh', position: 'fixed', top: 0, left: 0 }}>
           
