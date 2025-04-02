@@ -67,6 +67,7 @@ Here’s what we would like do in the future:
 - **AI Chatbot Agent**: We’re adding a chatbot agent that can handle things like bookings.
 - **Improved UI**: A more sophisticated and futuristic technological aesthetic for the site.
 - **More Diverse Colours**: Right now, the colour scheme is mostly **blues**, but we’re planning to introduce a wider range of colours.
+- **Thoroughly tested**: Our solution will be rigorously evaluated across diverse scenarios to ensure reliability and performance in real-world applications.
 
 ### **Further 3D Inspiration:**
 
