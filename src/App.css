@@ -1,60 +1,82 @@
-/* File: src/App.css */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 
-/* Reset default margins and paddings */
+
+/* Define color variables for consistency */
+:root {
+  --ai-cyan: #06b6d4;
+  --ai-emerald: #10b981;
+  --ai-indigo: #6366f1;
+  --ai-pink: #ec4899;
+  --ai-blue: #3b82f6;
+  --ai-slate: #0f172a;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Global scrolling behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  color: white;
+  height: 100%;
+}
+
 /* Main container */
 .main-container {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  /* padding: 0; */
+  z-index: -1;
 }
 
-/* Canvas container - fixed position */
+/* Canvas container */
 .canvas-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 1; /* Lower z-index to stay behind content */
+  z-index: 3; 
 }
 
-/* Scrollable content */
-.scroll-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  z-index: 2; /* Higher z-index to appear above canvas */
-  pointer-events: auto; /* Ensure scroll events work */
-}
 
-/* Each section takes full viewport height */
+/* Make sure section content is visible over the Canvas */
 .scroll-content section {
-  height: 100vh;
-  padding: 2rem;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* First section (hero) styling */
+.scroll-content section:first-child {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  /* Semi-transparent background to see the model */
-  background-color: rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Text styling */
-.scroll-content h1,
-.scroll-content h2 {
-  color: #333;
-  margin-bottom: 1rem;
+
+
+/* Hide scrollbars */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.scroll-content p {
-  color: #555;
-  font-size: 1.2rem;
-  max-width: 600px;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
