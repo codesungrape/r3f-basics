@@ -45,7 +45,7 @@ Being complete newbies to 3D modelling, here’s the plan we came up with:
 
 1. **Use an existing robot design** – We took inspiration from Giulio’s robot, grabbed a screenshot (below), and asked **ChatGPT** to generate the rest of the body and add a Doctor Strange-style cape.
 
-   **Result:** [![ai-doctor](ai-doctor.png)]
+   **Result:** [![ai-doctor](/public/ai-doctor.png)]
 
 2. **Convert 2D to 3D** – Using **Trellis**, we turned the concept into a 3D model and extracted the `.glb` file.
 
