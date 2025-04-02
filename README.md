@@ -1,27 +1,8 @@
-# Chris Meah Personal Website
+# Chris Meah Personal Website - The AI Doctor
 
 ## Project Overview
 
-A future-proof, immersive 3D website built with **React Three Fiber (r3f)** for Chris Meah at [chrismeah.com](https://chrismeah.com). This project showcases Chris's expertise in **Building, Training, and Speaking** about AI through an innovative, interactive 3D experience. The futuristic aesthetic not only engages visitors but embodies the cutting-edge nature of Chris's work, encouraging connections for **consulting, speaking engagements, and training sessions**.
-
-## Key Features
-
-- Immersive **3D environment** powered by **r3f** and **Three.js**
-- Interactive elements that **demonstrate AI concepts** in a visually compelling way
-- **Minimalist yet technologically advanced** user interface
-- Focused sections highlighting **Chris's expertise areas**
-- Seamless **contact and booking functionality**
-- **Responsive design** adaptable across all devices
-- Testimonial showcase from past **clients and bootcampers**
-- Video integration featuring **Chris's talks and appearances**
-
-## Target Audience
-
-- **Companies** seeking AI consulting services
-- **Event organizers** looking for expert AI speakers
-- **Individuals** wanting to learn about AI and Chris's background
-
-## Technical Foundation
+A 3D website built with **React Three Fiber (r3f)** for **Chris Meah** at [chrismeah.com](http://chrismeah.com).
 
 ### **Current Tech Stack:**
 
@@ -31,43 +12,79 @@ A future-proof, immersive 3D website built with **React Three Fiber (r3f)** for 
 - **3js.editor**
 - **ace-eternity**
 
-### **Planned Enhancements:**
+## Inspiration
 
-- **Integration with Blender** for custom 3D models
-- More **advanced animations**
-- A more **metallic, tech-like aesthetic**
-- Built with **scalability** in mind for future **CMS integration**
+This project brings the idea of Chris as the 'AI Doctor' to life—imagine Doctor Strange, but instead of bending reality, he's shaping the future of AI. We were actually debating if we should draw inspiration from a medical doctor or dr strange, we went with dr strange because the cape was easier to implement 😂
 
-## Concept & Inspiration
+## How it began
 
-Our design approach was inspired by modern **3D websites** that effectively blend technology and aesthetics:
+We stumbled upon the [Ethereum Foundation](https://ethereum.foundation/) website and thought it was _super cool_. This led us down a rabbit hole of exploring other 3D websites, and after checking the source code in Chrome DevTools, we saw they were using **Three.js**.
 
-- We studied successful implementations like **Junni, Joshua's World, Ethereum Foundation, and Lusion**
-- We chose **React Three Fiber (r3f)** as our foundation because it:
-  - Aligns with the project requirement for a **React-based website**
-  - Offers **powerful 3D capabilities** while maintaining React's **component-based approach**
-  - Provides an **ideal platform** for creating a **futuristic, AI-focused aesthetic**
-  - Allows for **easy maintenance and future expansion**
+Some of the coolest websites we came across:
 
-For the prototype, we used **Trellis** for rapid development, with plans to create more **custom 3D models** with input from Chris. The final product will feature **enhanced animations** and a **more sophisticated technological aesthetic**. Currently, the color is also mostly **blues**, but we plan to make it more **diverse**.
+1. ([Junni](https://next.junni.co.jp/))
+2. [Joshuas World](https://www.joshuas.world/)
+3. [Lusion](https://lusion.co/)
+
+But the one that really stood out—and became the main inspiration for our project—was[They Call Me Giulio](https://www.theycallmegiulio.com/).
+
+After discovering Giulio’s site, we had v0 try to recreate something similar because, at the time, we had no clue how to work with Three.js. The first attempt... well, it was _interesting_. 😅
+![v0](/public/v0.png)
+
+## Actual Implementation
+
+Once we started experimenting with Three.js, we ended up creating some **3D Chris head cubes** 😂 (check out our [Figma Board](https://www.figma.com/board/mFvEvcsT1cp0253TmjVDhg/Untitled?node-id=7-154&t=PDPHYRzHhghXMML8-0)).
+
+[chris-r3f-practice.vercel.app](https://chris-r3f-practice.vercel.app)
+
+**Finding a Better Approach** – As we got more comfortable with **React Three Fiber**, the idea of creating a Doctor Strange-inspired robot from scratch seemed a bit too much. So we thought, "Let's find a quicker way to make this happen."
+
+To make the concept work, we realised it was nearly impossible to pull off just by tweaking the actual code (at least to a good standard). So, we decided to look into quicker and easier solutions to get a very basic first working version.
+
+Being complete newbies to 3D modelling, here’s the plan we came up with:
+
+1. **Use an existing robot design** – We took inspiration from Giulio’s robot, grabbed a screenshot (below), and asked **ChatGPT** to generate the rest of the body and add a Doctor Strange-style cape.
+
+   **Result:** [![ai-doctor](ai-doctor.png)]
+
+2. **Convert 2D to 3D** – Using **Trellis**, we turned the concept into a 3D model and extracted the `.glb` file.
+
+   **Screenshot:**
+
+3. **Refine the Model** – Uploaded the `.glb` file to the **Three.js editor**, added lighting, made some tweaks, and exported the final `.gltf` file for our repo.
+
+4. **Final Prototype** – After uploading the model, playing around with it, and making sure it worked, we deployed the first working version!
+
+## First Prototype Thoughts
+
+The first working version is definitely not perfect, but it was the result of just **two days of work** (we were also pretty busy with Eid and other things). That said, we're excited about what’s next!
+
+Here’s what we would like do in the future:
+
+- **Blender Integration**: We want to improve the model by adding a more **metallic, tech-inspired aesthetic** for the custom 3D models.
+- **Advanced Animations**: Using **Blender** and the **Animation Mixer**, we want to bring in more human-like movement for the 3D model.
+- **Customized 3D Avatar**:We love the Dr. AI and Dr. Strange inspirations! If you're open to it we would like to set up a **consultation with you** to discuss the best avatar to represent you— we're just getting started with the 3D concept!
+- **AI Chatbot Agent**: We’re adding a chatbot agent that can handle things like bookings.
+- **Improved UI**: A more sophisticated and futuristic technological aesthetic for the site.
+- **More Diverse Colours**: Right now, the colour scheme is mostly **blues**, but we’re planning to introduce a wider range of colours.
 
 ### **Further 3D Inspiration:**
 
-- **Bokoko33**
+- **https://www.awwwards.com/websites/three-js/**
 
 ## Acknowledgements
 
 - **React Three Fiber Basics:** [YouTube Tutorial 1](#)
-- [YouTube Tutorial 2](#)
+- **Three.js tutorial: Editor for beginners:** [YouTube Tutorial 2](#)
 
 ## Installation and Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/chrismeah-website.git
+git clone git@github.com:codesungrape/r3f-basics.git
 
 # Navigate to the project directory
-cd chrismeah-website
+cd r3f-basics
 
 # Install dependencies
 npm install
