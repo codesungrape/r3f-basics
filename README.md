@@ -57,7 +57,7 @@ Being complete newbies to 3D modelling, here’s the plan we came up with:
 
 ## First Prototype Thoughts
 
-The first working version is definitely not perfect. This is most likely as we were also pretty busy with Eid, Vonage Hackathon, preparing for interviews, 15 applications a week as per Vicky's advice and other things. That said, it's definetly not an excuse and we're excited about what’s next, having seem what we could achieve in the space of a few hours scattered over a week!
+The first working version is definitely not perfect. This is most likely as we were also pretty busy with Eid, Vonage Hackathon, preparing for interviews, 15 applications a week as per Vicky's advice and other things. That said, it's definetly not an excuse and we're excited about what’s next, having seen what we could achieve in the space of a few hours scattered over a week!
 
 Here’s what we would like do in the future:
 
