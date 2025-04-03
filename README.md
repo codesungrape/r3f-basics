@@ -14,7 +14,7 @@ A 3D website built with **React Three Fiber (r3f)** for **Chris Meah** at [chris
 
 ## Inspiration
 
-This project brings the idea of Chris as the 'AI Doctor' to life—imagine Doctor Strange, but instead of bending reality, he's shaping the future of AI. We were actually debating if we should draw inspiration from a medical doctor or dr strange, we went with dr strange because the cape was easier to implement 😂
+This project brings the idea of Chris as the 'AI Doctor' to life—imagine Doctor Strange, but instead of bending reality, he's shaping the future of AI. We were actually debating if we should draw inspiration from a medical doctor or dr strange, we went with dr strange for this. 
 
 ## How it began
 
@@ -57,12 +57,13 @@ Being complete newbies to 3D modelling, here’s the plan we came up with:
 
 ## First Prototype Thoughts
 
-The first working version is definitely not perfect, but it was the result of just **two days of work** (we were also pretty busy with Eid and other things). That said, we're excited about what’s next!
+The first working version is definitely not perfect. This is most likely as we were also pretty busy with Eid, Vonage Hackathon, preparing for interviews, 15 applications a week as per Vicky's advice and other things. That said, it's definetly not an excuse and we're excited about what’s next, having seem what we could achieve in the space of a few hours scattered over a week!
 
 Here’s what we would like do in the future:
 
 - **Blender Integration**: We want to improve the model by adding a more **metallic, tech-inspired aesthetic** for the custom 3D models.
 - **Advanced Animations**: Using **Blender** and the **Animation Mixer**, we want to bring in more human-like movement for the 3D model.
+- **Chris' journey**: The model should take the user on an interactive journey through Chris' achievements.
 - **Customized 3D Avatar**:We love the Dr. AI and Dr. Strange inspirations! If you're open to it we would like to set up a **consultation with you** to discuss the best avatar to represent you— we're just getting started with the 3D concept!
 - **AI Chatbot Agent**: We’re adding a chatbot agent that can handle things like bookings.
 - **Improved UI**: A more sophisticated and futuristic technological aesthetic for the site.
