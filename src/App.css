@@ -4,14 +4,14 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 /* Define color variables for consistency */
-:root {
+/* :root {
   --ai-cyan: #06b6d4;
   --ai-emerald: #10b981;
   --ai-indigo: #6366f1;
   --ai-pink: #ec4899;
   --ai-blue: #3b82f6;
   --ai-slate: #0f172a;
-}
+} */
 
 * {
   margin: 0;
@@ -23,22 +23,13 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
   overflow-x: hidden;
   color: white;
   height: 100%;
-}
-
-/* Main container */
-.main-container {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  /* padding: 0; */
-  z-index: -1;
 }
 
 /* Canvas container */
@@ -58,10 +49,4 @@ body {
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-}
-
-/* Hide scrollbars */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
