@@ -3,23 +3,17 @@ import { motion } from "motion/react";
 import { cn } from "../../lib/utils";
 
 // StickyScroll component
-export const StickyScroll = ({
-  content,
-  contentClassName,
-  onCardChange,
-}) => {
+export const StickyScroll = ({ content, contentClassName, onCardChange }) => {
   const [activeCard, setActiveCard] = useState(0);
   const sectionRefs = useRef([]);
   const containerRef = useRef(null);
 
-
   useEffect(() => {
     if (!containerRef.current) return;
 
-    
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = Number(entry.target.dataset.index);
             if (index !== activeCard) {
@@ -31,21 +25,20 @@ export const StickyScroll = ({
           }
         });
       },
-      { 
+      {
         threshold: 0.6,
-        root: null 
+        root: null,
       }
     );
-    
+
     // Observe all section elementsxa
-    sectionRefs.current.forEach(ref => {
+    sectionRefs.current.forEach((ref) => {
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
-
   }, [content.length, activeCard, onCardChange]);
-  
+
   // Current gradient
   const gradients = [
     "linear-gradient(to bottom right, #06b6d4, #10b981) ",
@@ -54,41 +47,47 @@ export const StickyScroll = ({
     "linear-gradient(to bottom right, #3b82f6, #14b8a6)",
   ];
   const currentGradient = gradients[activeCard % gradients.length];
-  
+
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="relative w-full flex min-h-screen "
+      className="w-[60vw] flex min-h-screen justify-center gap-80"
     >
       {/* Content sections */}
-      <div className="w-full ">
+      <div>
         {content.map((item, index) => (
-          <section 
+          <section
             key={`content-${index}`}
-            ref={el => sectionRefs.current[index] = { current: el }}
+            ref={(el) => (sectionRefs.current[index] = { current: el })}
             data-index={index}
             className="flex items-center justify-between snap-start snap-always"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ 
+              animate={{
                 opacity: activeCard === index ? 1 : 0.3,
-                y: activeCard === index ? 0 : 10
+                y: activeCard === index ? 0 : 10,
               }}
               transition={{ duration: 0.5 }}
-              className="max-w-lg "
+              className="max-w-2xl 5"
             >
-              <h2 className="text-3xl font-bold text-white mb-6">
+              <h2 className="text-3xl font-bold text-white mb-10">
                 {item.title}
               </h2>
-              <p className="text-xl text-slate-300">
-                {item.description}
-              </p>
+              <p className="text-xl text-slate-300">{item.description}</p>
             </motion.div>
           </section>
         ))}
       </div>
-
+      {/* <div
+        style={{ background: currentGradient }}
+        className={cn(
+          "sticky top-70 right-0 h-60 w-80 overflow-hidden rounded-xl",
+          contentClassName
+        )}
+      >
+        {content[activeCard].content ?? null}
+      </div> */}
     </div>
   );
 };

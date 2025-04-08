@@ -3,7 +3,6 @@
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-
 /* Define color variables for consistency */
 :root {
   --ai-cyan: #06b6d4;
@@ -49,9 +48,8 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 3; 
+  z-index: 3;
 }
-
 
 /* Make sure section content is visible over the Canvas */
 .scroll-content section {
@@ -62,21 +60,8 @@ body {
   scroll-snap-stop: always;
 }
 
-/* First section (hero) styling */
-.scroll-content section:first-child {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
 /* Hide scrollbars */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
